@@ -35,3 +35,10 @@ func NewLogger(directory string) error {
 	logInstance = &Logger{file: file}
 	return nil
 }
+
+// log writes a log message to the file with the specified severity and message.
+func (l *Logger) log(severity, message string) {
+	now := time.Now().Format("2006-01-02 15:04:05")
+	logMessage := fmt.Sprintf("[%s] [%s] %s\n", now, severity, message)
+	l.file.WriteString(logMessage)
+}
